@@ -1,0 +1,41 @@
+{
+  "name": "rawprotoparse",
+  "version": "0.0.0",
+  "description": "Very small raw-protobuf parser",
+  "type": "module",
+  "source": "rawproto.js",
+  "exports": {
+    "require": "./dist/rawproto.cjs",
+    "default": "./dist/rawproto.modern.js"
+  },
+  "main": "./dist/rawproto.cjs",
+  "module": "./dist/rawproto.module.js",
+  "unpkg": "./dist/rawproto.umd.js", 
+  "scripts": {
+    "test": "vitest --run --globals",
+    "build": "microbundle",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "protobuf",
+    "raw",
+    "parse",
+    "decode",
+    "reverse-engineer",
+    "binary"
+  ],
+  "author": "David Konsumer <konsumer@jetboystudio.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "vitest": "^1.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/konsumer/rawprotoparse/issues"
+  },
+  "homepage": "https://github.com/konsumer/rawprotoparse#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konsumer/rawprotoparse.git"
+  }
+}
