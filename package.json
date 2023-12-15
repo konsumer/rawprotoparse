@@ -10,7 +10,7 @@
   },
   "main": "./dist/rawproto.cjs",
   "module": "./dist/rawproto.module.js",
-  "unpkg": "./dist/rawproto.umd.js", 
+  "unpkg": "./dist/rawproto.umd.js",
   "scripts": {
     "test": "vitest --run --globals",
     "build": "microbundle",
@@ -28,6 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "microbundle": "^0.15.1",
+    "protobufjs": "^7.2.5",
     "vitest": "^1.0.4"
   },
   "bugs": {
