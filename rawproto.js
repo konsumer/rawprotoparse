@@ -1,4 +1,6 @@
-// read more here: https://github.com/protobufjs/protobuf.js/wiki/How-to-reverse-engineer-a-buffer-by-hand
+// read more here:
+// https://github.com/protobufjs/protobuf.js/wiki/How-to-reverse-engineer-a-buffer-by-hand
+// https://protobuf.dev/programming-guides/encoding/
 
 const decoder = new TextDecoder()
 

@@ -74,7 +74,7 @@ exports[`buffers made with protobufjs > Test message 1`] = `
 }
 `;
 
-exports[`documented hand-parsing > message from article 1`] = `
+exports[`documented hand-parsing > message from protobufjs wiki 1`] = `
 {
   "f1": [
     {
@@ -138,6 +138,31 @@ exports[`documented hand-parsing > message from article 1`] = `
           ],
           "type": "Buffer",
         },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`documented hand-parsing > protobufjs#143 1`] = `
+{
+  "f1": [
+    {
+      "f14": [
+        "h_server_v0.1",
+      ],
+    },
+  ],
+  "f2": [
+    6,
+  ],
+  "f8": [
+    {
+      "f1": [
+        "livingrom_sensormodule",
+      ],
+      "f2": [
+        "temp",
       ],
     },
   ],
