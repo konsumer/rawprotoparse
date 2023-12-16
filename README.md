@@ -31,7 +31,7 @@ readFile('somebinaryfile.pb', (err, bytes) => {
 ### web (old style)
 
 ```html
-<script src="https://esm.run/rawprotoparse/dist/rawproto.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rawprotoparse/dist/rawproto.umd.js"></script>
 <script>
 console.log(rawprotoparse(someBytes))
 </script>
