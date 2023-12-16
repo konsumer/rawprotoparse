@@ -4,37 +4,52 @@ import codec from 'protobuf-codec'
 
 const { decode: { reader, types, wireTypes: { decoders } } } = codec
 
-// entry-point util function that will assemble the protobuf into a js-object
-export function rawprotoparse (buffer, prefix = 'f', lengthDeliminted = false, stringMode = 'auto') {
-  const out = {}
-  for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
-    out[`${prefix}${fieldNumber}`] ||= []
-
-    // console.log(fieldNumber, wireType, data)
-    if (wireType === 0) {
-      out[`${prefix}${fieldNumber}`].push(parseInt(data)) // could be bad for big numbers
-    }
-
-    if (wireType === 1) {
-      out[`${prefix}${fieldNumber}`].push(data)
-    }
-
-    if (wireType === 2) {
+// map wireType to data
+function getVal (data, wireType, prefix, stringMode, arrayMode) {
+  switch (wireType) {
+    case 0: return parseInt(data)
+    case 1: return data
+    case 2:
       try {
-        out[`${prefix}${fieldNumber}`].push(rawprotoparse(data, prefix))
+        return rawprotoparse(data, prefix, stringMode, arrayMode)
       } catch (e) {
         if (stringMode === 'auto') {
           const lowBytes = false
           if (data.find(b => b < 32)) {
-            out[`${prefix}${fieldNumber}`].push(data)
+            return data
           } else {
-            out[`${prefix}${fieldNumber}`].push(types.string(data))
+            return types.string(data)
           }
         } else if (stringMode === 'string') {
-          out[`${prefix}${fieldNumber}`].push(types.string(data))
+          return types.string(data)
         } else {
-          out[`${prefix}${fieldNumber}`].push(data)
+          return data
         }
+      }
+  }
+}
+
+// entry-point util function that will assemble the protobuf into a js-object
+export function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false) {
+  const out = {}
+  for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
+    if (arrayMode) {
+      out[`${prefix}${fieldNumber}`] ||= []
+    }
+
+    const v = getVal(data, wireType, prefix, stringMode, arrayMode)
+
+    if (arrayMode) {
+      out[`${prefix}${fieldNumber}`].push(v)
+    } else {
+      if (out[`${prefix}${fieldNumber}`]) {
+        if (Array.isArray(out[`${prefix}${fieldNumber}`])) {
+          out[`${prefix}${fieldNumber}`].push(v)
+        } else {
+          out[`${prefix}${fieldNumber}`] = [out[`${prefix}${fieldNumber}`], v]
+        }
+      } else {
+        out[`${prefix}${fieldNumber}`] = v
       }
     }
   }
