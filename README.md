@@ -31,7 +31,7 @@ readFile('somebinaryfile.pb', (err, bytes) => {
 ### web (old style)
 
 ```html
-<script src="TODO"></script>
+<script src="https://esm.run/rawprotoparse/dist/rawproto.umd.js"></script>
 <script>
 console.log(rawprotoparse(someBytes))
 </script>
@@ -41,8 +41,21 @@ console.log(rawprotoparse(someBytes))
 
 ```html
 <script type="module">
-import rawprotoparse from "TODO"
+import rawprotoparse from "https://esm.run/rawprotoparse"
 
 console.log(rawprotoparse(someBytes))
 </script>
 ```
+
+### options
+
+```js
+rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false)
+```
+
+- `prefix` - a string to put in front of the fieldnames
+- `stringMode` - a string for what to do with buffers.
+  - `auto` - try to guess if it's `string` or `buffer`, based on bytes
+  - `string` - force a string, that may have escaped characters
+  - `buffer` - outputs an array of bytes. I use a plain array so that you can encode to JSON easier
+- arrayMode - a boolean that forces all fields to be arrays. This allows you to assume all values are arrays (not just repeated fields)
