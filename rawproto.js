@@ -7,8 +7,15 @@ const { decode: { reader, types, wireTypes: { decoders } } } = codec
 // map wireType to data
 function getVal (data, wireType, prefix, stringMode, arrayMode) {
   switch (wireType) {
-    case 0: return parseInt(data)
-    case 1: return data
+    // varint - could be bad if it's big (over 6 bytes) but this will handle most usecases
+    case 0:
+      return parseInt(data)
+
+    // fixed64bit - returns a BigInt
+    case 1:
+      return data
+
+    // bytes - try to parse as sub-message, and handle stringMode
     case 2:
       try {
         return rawprotoparse(data, prefix, stringMode, arrayMode)
@@ -27,6 +34,18 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
         }
       }
       break
+
+    // these are depracated group messages
+    case 3:
+    case 4:
+      return null
+
+    // fixed32bit - returns a regular int
+    case 5:
+      return data
+
+    default:
+      throw new Error(`Invalid wire-type: ${wireType}`)
   }
 }
 
@@ -35,6 +54,10 @@ export function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayM
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
     const v = getVal(data, wireType, prefix, stringMode, arrayMode)
+
+    if (v === null) {
+      continue
+    }
 
     if (arrayMode) {
       out[`${prefix}${fieldNumber}`] ||= []
