@@ -48,7 +48,7 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
 }
 
 // entry-point util function that will assemble the protobuf into a js-object
-export function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false) {
+export default function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false) {
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
     const v = getVal(data, wireType, prefix, stringMode, arrayMode)
@@ -74,5 +74,3 @@ export function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayM
   }
   return out
 }
-
-export default rawprotoparse
