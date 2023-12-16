@@ -58,4 +58,4 @@ rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false)
   - `auto` - try to guess if it's `string` or `buffer`, based on bytes
   - `string` - force a string, that may have escaped characters
   - `buffer` - outputs an array of bytes. I use a plain array so that you can encode to JSON easier
-- arrayMode - a boolean that forces all fields to be arrays. This allows you to assume all values are arrays (not just repeated fields)
+- `arrayMode` - a boolean that forces all fields to be arrays. This allows you to assume all values are arrays (not just repeated fields)
