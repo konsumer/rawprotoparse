@@ -14,16 +14,13 @@ exports[`Simple > prefix=a 1`] = `
 
 exports[`Test > default: prefix=f, stringMode=auto, arrayMode=false 1`] = `
 {
-  "f1": {
-    "data": [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
-    "type": "Buffer",
-  },
+  "f1": [
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
   "f2": 1,
   "f3": "hello",
   "f4": [
@@ -54,16 +51,13 @@ exports[`Test > default: prefix=f, stringMode=auto, arrayMode=false 1`] = `
 
 exports[`Test > prefix=a, stringMode=auto, arrayMode=false 1`] = `
 {
-  "a1": {
-    "data": [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
-    "type": "Buffer",
-  },
+  "a1": [
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
   "a2": 1,
   "a3": "hello",
   "a4": [
@@ -95,16 +89,13 @@ exports[`Test > prefix=a, stringMode=auto, arrayMode=false 1`] = `
 exports[`Test > prefix=f, stringMode=auto, arrayMode=true 1`] = `
 {
   "f1": [
-    {
-      "data": [
-        1,
-        2,
-        3,
-        4,
-        5,
-      ],
-      "type": "Buffer",
-    },
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+    ],
   ],
   "f2": [
     1,
@@ -164,72 +155,57 @@ exports[`Test > prefix=f, stringMode=auto, arrayMode=true 1`] = `
 
 exports[`Test > prefix=f, stringMode=buffer, arrayMode=false 1`] = `
 {
-  "f1": {
-    "data": [
-      1,
-      2,
-      3,
-      4,
-      5,
-    ],
-    "type": "Buffer",
-  },
+  "f1": [
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
   "f2": 1,
-  "f3": {
-    "data": [
-      104,
-      101,
-      108,
-      108,
-      111,
-    ],
-    "type": "Buffer",
-  },
+  "f3": [
+    104,
+    101,
+    108,
+    108,
+    111,
+  ],
   "f4": [
     {
       "f1": 1,
-      "f2": {
-        "data": [
-          99,
-          111,
-          111,
-          108,
-        ],
-        "type": "Buffer",
-      },
+      "f2": [
+        99,
+        111,
+        111,
+        108,
+      ],
       "f3": {
         "f1": 1,
       },
     },
     {
       "f1": 2,
-      "f2": {
-        "data": [
-          97,
-          119,
-          101,
-          115,
-          111,
-          109,
-          101,
-        ],
-        "type": "Buffer",
-      },
+      "f2": [
+        97,
+        119,
+        101,
+        115,
+        111,
+        109,
+        101,
+      ],
       "f3": {
         "f1": 2,
       },
     },
     {
       "f1": 3,
-      "f2": {
-        "data": [
-          110,
-          101,
-          97,
-          116,
-        ],
-        "type": "Buffer",
-      },
+      "f2": [
+        110,
+        101,
+        97,
+        116,
+      ],
       "f3": {
         "f1": 3,
       },

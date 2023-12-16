@@ -16,16 +16,17 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
         if (stringMode === 'auto') {
           const lowBytes = false
           if (data.find(b => b < 32)) {
-            return data
+            return Array.from(data)
           } else {
             return types.string(data)
           }
         } else if (stringMode === 'string') {
           return types.string(data)
         } else {
-          return data
+          return Array.from(data)
         }
       }
+      break
   }
 }
 
@@ -33,13 +34,10 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
 export function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false) {
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
-    if (arrayMode) {
-      out[`${prefix}${fieldNumber}`] ||= []
-    }
-
     const v = getVal(data, wireType, prefix, stringMode, arrayMode)
 
     if (arrayMode) {
+      out[`${prefix}${fieldNumber}`] ||= []
       out[`${prefix}${fieldNumber}`].push(v)
     } else {
       if (out[`${prefix}${fieldNumber}`]) {
