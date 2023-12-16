@@ -1,5 +1,17 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Simple > default: prefix=f 1`] = `
+{
+  "f1": 105,
+}
+`;
+
+exports[`Simple > prefix=a 1`] = `
+{
+  "a1": 105,
+}
+`;
+
 exports[`Test > default: prefix=f, stringMode=auto, arrayMode=false 1`] = `
 {
   "f1": {

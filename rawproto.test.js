@@ -4,7 +4,25 @@ import rawprotoparse from './rawproto.js'
 
 const proto = await protobuf.load(new URL('test.proto', import.meta.url).pathname)
 
-const Simple = proto.lookupType('Simple')
+describe('Simple', () => {
+  const Simple = proto.lookupType('Simple')
+
+  const pb = Simple.encode({ a: 105 }).finish()
+
+  /*
+  08 69
+  */
+
+  test('default: prefix=f', () => {
+    const r = rawprotoparse(pb)
+    expect(r).toMatchSnapshot()
+  })
+
+  test('prefix=a', () => {
+    const r = rawprotoparse(pb, 'a')
+    expect(r).toMatchSnapshot()
+  })
+})
 
 describe('Test', () => {
   const Test = proto.lookupType('Test')
