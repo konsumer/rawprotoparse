@@ -1,8 +1,6 @@
 // TODO: inline this
 
-import codec from 'protobuf-codec'
-
-const { decode: { reader, types, wireTypes: { decoders } } } = codec
+import { reader, types, decoders } from './protobuf-codec.js'
 
 // map wireType to data
 function getVal (data, wireType, prefix, stringMode, arrayMode) {

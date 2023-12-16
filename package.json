@@ -38,8 +38,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/konsumer/rawprotoparse.git"
-  },
-  "dependencies": {
-    "protobuf-codec": "^2.0.5"
   }
 }
