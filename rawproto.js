@@ -2,8 +2,10 @@
 
 import { reader, types, decoders } from './protobuf-codec.js'
 
+export { reader, types, decoders }
+
 // map wireType to data
-function getVal (data, wireType, prefix, stringMode, arrayMode) {
+export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
   switch (wireType) {
     // varint - could be bad if it's big (over 6 bytes) but this will handle most usecases
     case 0:
@@ -16,10 +18,9 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
     // bytes - try to parse as sub-message, and handle stringMode
     case 2:
       try {
-        return rawprotoparse(data, prefix, stringMode, arrayMode)
+        return rawprotoparse(data, prefix, stringMode, arrayMode, valueHandler)
       } catch (e) {
         if (stringMode === 'auto') {
-          const lowBytes = false
           if (data.find(b => b < 32)) {
             return Array.from(data)
           } else {
@@ -31,7 +32,6 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
           return Array.from(data)
         }
       }
-      break
 
     // these are depracated group messages
     case 3:
@@ -48,10 +48,10 @@ function getVal (data, wireType, prefix, stringMode, arrayMode) {
 }
 
 // entry-point util function that will assemble the protobuf into a js-object
-export default function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false) {
+export default function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal) {
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
-    const v = getVal(data, wireType, prefix, stringMode, arrayMode)
+    const v = valueHandler(data, wireType, prefix, stringMode, arrayMode, valueHandler)
 
     if (v === null) {
       continue
