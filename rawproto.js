@@ -4,7 +4,18 @@ import { reader, types, decoders } from './protobuf-codec.js'
 
 export { reader, types, decoders }
 
-// map wireType to data
+/**
+ * Default callback for mapping wireType to data
+ *
+ * @export
+ * @param {Number|String} data the value of the current field (number of buffer)
+ * @param {Number} wireType A number that represents the protobuf wire-type (see https://protobuf.dev/programming-guides/encoding/#structure)
+ * @param {String} prefix A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
+ * @param {String} stringMode How to handle LEN fields, whcih can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
+ * @param {Boolean} arrayMode Should the output fields be arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON.
+ * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
+ * @returns {*}
+ */
 export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
   switch (wireType) {
     // varint - could be bad if it's big (over 6 bytes) but this will handle most usecases
@@ -47,7 +58,17 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
   }
 }
 
-// entry-point util function that will assemble the protobuf into a js-object
+/**
+ * Entry-point util function that will assemble the protobuf into a js-object
+ *
+ * @export
+ * @param {String} buffer The buffer of binary protobuf to parse
+ * @param {string} [prefix='f'] A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
+ * @param {string} [stringMode='auto'] How to handle LEN fields, whcih can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
+ * @param {boolean} [arrayMode=false] arrayMode Should the output fields be arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON.
+ * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
+ * @returns {any) => {}}
+ */
 export default function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal) {
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
