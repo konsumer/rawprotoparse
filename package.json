@@ -11,6 +11,7 @@
   "main": "./dist/rawproto.cjs",
   "module": "./dist/rawproto.module.js",
   "unpkg": "./dist/rawproto.umd.js",
+  "types": "./dist/rawproto.d.ts",
   "scripts": {
     "test": "vitest --run --globals",
     "build": "microbundle",
