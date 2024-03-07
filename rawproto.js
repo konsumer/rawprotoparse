@@ -62,7 +62,7 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * Entry-point util function that will assemble the protobuf into a js-object
  *
  * @export
- * @param {String} buffer The buffer of binary protobuf to parse
+ * @param {Uint8Array|Buffer} buffer The buffer of binary protobuf to parse
  * @param {string} [prefix='f'] A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
  * @param {string} [stringMode='auto'] How to handle LEN fields, whcih can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
  * @param {boolean} [arrayMode=false] arrayMode Should the output fields be arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON.
