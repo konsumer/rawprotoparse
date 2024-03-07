@@ -11,8 +11,8 @@ export { reader, types, decoders }
  * @param {Number|String} data the value of the current field (number of buffer)
  * @param {Number} wireType A number that represents the protobuf wire-type (see https://protobuf.dev/programming-guides/encoding/#structure)
  * @param {String} prefix A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
- * @param {String} stringMode How to handle LEN fields, whcih can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
- * @param {Boolean} arrayMode Should the output fields be arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON.
+ * @param {String} stringMode How to handle LEN fields, which can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
+ * @param {Boolean} arrayMode  arrayMode Should the output fields be fordced to arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON. Normally, this will decide if it should be an array or not, but you can force arrays always, to keep it uniform.
  * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {*}
  */
@@ -64,8 +64,8 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * @export
  * @param {Uint8Array|Buffer} buffer The buffer of binary protobuf to parse
  * @param {string} [prefix='f'] A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
- * @param {string} [stringMode='auto'] How to handle LEN fields, whcih can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
- * @param {boolean} [arrayMode=false] arrayMode Should the output fields be arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON.
+ * @param {string} [stringMode='auto'] How to handle LEN fields, which can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
+ * @param {boolean} [arrayMode=false] arrayMode Should the output fields be fordced to arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON. Normally, this will decide if it should be an array or not, but you can force arrays always, to keep it uniform.
  * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {any) => {}}
  */
