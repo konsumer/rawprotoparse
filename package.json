@@ -38,5 +38,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/konsumer/rawprotoparse.git"
-  }
+  },
+  "files": "dist/*"
 }
