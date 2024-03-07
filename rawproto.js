@@ -16,7 +16,7 @@ export { reader, types, decoders }
  * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {*}
  */
-export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
+export function getVal(data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
   switch (wireType) {
     // varint - could be bad if it's big (over 6 bytes) but this will handle most usecases
     case 0:
@@ -32,7 +32,7 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
         return rawprotoparse(data, prefix, stringMode, arrayMode, valueHandler)
       } catch (e) {
         if (stringMode === 'auto') {
-          if (data.find(b => b < 32)) {
+          if (data.find((b) => b < 32)) {
             return Array.from(data)
           } else {
             return types.string(data)
@@ -69,7 +69,7 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {any) => {}}
  */
-export default function rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal) {
+export default function rawprotoparse(buffer, prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal) {
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
     const v = valueHandler(data, wireType, prefix, stringMode, arrayMode, valueHandler)
