@@ -8,7 +8,7 @@ export { reader, types, decoders }
  * Default callback for mapping wireType to data
  *
  * @export
- * @param {Number|String} data the value of the current field (number of buffer)
+ * @param {Number|Uint8Array} data the value of the current field
  * @param {Number} wireType A number that represents the protobuf wire-type (see https://protobuf.dev/programming-guides/encoding/#structure)
  * @param {String} prefix A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
  * @param {String} stringMode How to handle LEN fields, which can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
