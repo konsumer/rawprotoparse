@@ -41,7 +41,7 @@ console.log(rawprotoparse(someBytes))
 ### options
 
 ```js
-rawprotoparse (buffer, prefix = 'f', stringMode = 'auto', arrayMode = false)
+rawprotoparse (buffer, {prefix = 'f', stringMode = 'auto', arrayMode = false})
 ```
 
 - `prefix` - a string to put in front of the fieldnames

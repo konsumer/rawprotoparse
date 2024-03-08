@@ -13,7 +13,7 @@ export { reader, types, decoders }
  * @param {String} [prefix] A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
  * @param {String} [stringMode] How to handle LEN fields, which can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
  * @param {Boolean} [arrayMode]  arrayMode Should the output fields be fordced to arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON. Normally, this will decide if it should be an array or not, but you can force arrays always, to keep it uniform.
- * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
+ * @param {(data: Number|Uint8Array, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {*}
  */
 export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
@@ -67,8 +67,8 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * @param {string} [options.prefix='f'] A string-prefix to use for outputting objects. for example field id 1 will be "f1" if the prefix is "f"
  * @param {string} [options.stringMode='auto'] How to handle LEN fields, which can be byte-buffers, sub-messages, or strings. Could be "auto", "string", or "buffer".
  * @param {boolean} [options.arrayMode=false] arrayMode Should the output fields be fordced to arrays? This is to handle the idea that a field can have multiple values, which does not cleanly map to JSON. Normally, this will decide if it should be an array or not, but you can force arrays always, to keep it uniform.
- * @param {(data: Number|String, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [options.valueHandler=getVal]
- * @returns {any) => {}}
+ * @param {(data: Number|Uint8Array, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [options.valueHandler=getVal]
+ * @returns {any}
  */
 export default function rawprotoparse (buffer, options = {}) {
   const { prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal } = options
