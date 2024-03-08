@@ -1,7 +1,7 @@
 /* global describe, test, expect */
 
 import protobuf from 'protobufjs'
-import rawprotoparse, { getVal } from './rawproto.js'
+import rawprotoparse, { getVal } from '../src/rawproto.js'
 
 const proto = await protobuf.load(new URL('test.proto', import.meta.url).pathname)
 

@@ -1,6 +1,6 @@
 {
     "include": [
-        "./*.js"
+        "./src/*.js"
     ],
     "compilerOptions": {
         "allowJs": true,

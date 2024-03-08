@@ -70,7 +70,7 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * @param {(data: Number|Uint8Array, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [options.valueHandler=getVal]
  * @returns {any}
  */
-export default function rawprotoparse (buffer, options = {}) {
+export function rawprotoparse (buffer, options = {}) {
   const { prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal } = options
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
@@ -97,3 +97,5 @@ export default function rawprotoparse (buffer, options = {}) {
   }
   return out
 }
+
+export default rawprotoparse

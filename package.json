@@ -3,7 +3,7 @@
   "version": "0.0.7",
   "description": "Very small raw-protobuf parser",
   "type": "module",
-  "source": "rawproto.js",
+  "source": "src/rawproto.js",
   "exports": {
     "require": "./dist/rawproto.cjs",
     "default": "./dist/rawproto.modern.js"

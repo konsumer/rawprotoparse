@@ -20,7 +20,7 @@ console.log(rawprotoparse(await readFile('somebinaryfile.pb')))
 ### nodejs (commonjs)
 
 ```js
-const rawprotoparse  = require('rawprotoparse')
+const { rawprotoparse }  = require('rawprotoparse')
 const { readFile }  = require('fs')
 
 readFile('somebinaryfile.pb', (err, bytes) => {
@@ -50,4 +50,4 @@ rawprotoparse (buffer, { prefix = 'f', stringMode = 'auto', arrayMode = false })
   - `string` - force a string, that may have escaped characters
   - `buffer` - outputs an array of bytes. I use a plain array so that you can encode to JSON easier
 - `arrayMode` - a boolean that forces all fields to be arrays. This allows you to assume all values are arrays (not just repeated fields)
-- `valueHandler` - a custom value-handler, if you want to do something special. See [test](https://github.com/konsumer/rawprotoparse/blob/main/rawproto.test.js#L78-L93) for example.
+- `valueHandler` - a custom value-handler, if you want to do something special. See [test](https://github.com/konsumer/rawprotoparse/blob/main/test/rawproto.test.js#L78-L93) for example.

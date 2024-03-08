@@ -41,7 +41,7 @@ const s = document.getElementById('source')
 const o = document.getElementById('out')
 
 // function to turn string in #source into a buffer
-function getBuffer() {
+function getBuffer () {
   const regex = /[0-F]+/gm
   let m
   const out = []
@@ -51,7 +51,7 @@ function getBuffer() {
   return new Uint8Array(out)
 }
 
-function update() {
+function update () {
   o.innerHTML = JSON.stringify(rawprotoparse(getBuffer()), null, 2)
 }
 update()
