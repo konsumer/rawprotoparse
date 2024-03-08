@@ -28,36 +28,35 @@
 6F 6D 65 1A  02 08 02 22
 0C 08 03 12  04 6E 65 61
 74 1A 02 08  03
-</textarea
-  >
+</textarea>
 
   <code>
     <pre id="out"></pre>
   </code>
 
-  <script type="module">
-    import rawprotoparse from 'https://esm.run/rawprotoparse'
+<script type="module">
+import rawprotoparse from 'https://esm.run/rawprotoparse'
 
-    const s = document.getElementById('source')
-    const o = document.getElementById('out')
+const s = document.getElementById('source')
+const o = document.getElementById('out')
 
-    // function to turn string in #source into a buffer
-    function getBuffer() {
-      const regex = /[0-F]+/gm
-      let m
-      const out = []
-      while ((m = regex.exec(s.value)) !== null) {
-        out.push(parseInt(m[0], 16))
-      }
-      return new Uint8Array(out)
-    }
+// function to turn string in #source into a buffer
+function getBuffer() {
+  const regex = /[0-F]+/gm
+  let m
+  const out = []
+  while ((m = regex.exec(s.value)) !== null) {
+    out.push(parseInt(m[0], 16))
+  }
+  return new Uint8Array(out)
+}
 
-    function update() {
-      o.innerHTML = JSON.stringify(rawprotoparse(getBuffer()), null, 2)
-    }
-    update()
+function update() {
+  o.innerHTML = JSON.stringify(rawprotoparse(getBuffer()), null, 2)
+}
+update()
 
-    s.addEventListener('keyup', update)
-    s.addEventListener('change', update)
-  </script>
+s.addEventListener('keyup', update)
+s.addEventListener('change', update)
+</script>
 </body>
