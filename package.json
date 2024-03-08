@@ -1,6 +1,6 @@
 {
   "name": "rawprotoparse",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Very small raw-protobuf parser",
   "type": "module",
   "source": "src/rawproto.js",
