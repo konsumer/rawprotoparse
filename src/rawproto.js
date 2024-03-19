@@ -29,10 +29,6 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
     // bytes - try to parse as sub-message, and handle stringMode
     case 2:
       try {
-        // if it's auto, then see if it could be a string before parsing as message
-        if (stringMode === 'auto' && !data.find(c => c < 32)) {
-          return types.string(data)
-        }
         return rawprotoparse(data, { prefix, stringMode, arrayMode, valueHandler })
       } catch (e) {
         if (stringMode === 'auto') {
