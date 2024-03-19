@@ -16,7 +16,7 @@ export { reader, types, decoders }
  * @param {(data: Number|Uint8Array, wireType: Number, prefix: String, stringMode: String, arrayMode: Boolean, valueHandler?: typeof getVal) => any} [valueHandler=getVal]
  * @returns {*}
  */
-export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal) {
+export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHandler = getVal, currentPath = '') {
   switch (wireType) {
     // varint - could be bad if it's big (over 6 bytes) but this will handle most usecases
     case 0:
@@ -29,10 +29,14 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
     // bytes - try to parse as sub-message, and handle stringMode
     case 2:
       try {
-        return rawprotoparse(data, { prefix, stringMode, arrayMode, valueHandler })
+        return rawprotoparse(data, { prefix, stringMode, arrayMode, valueHandler, currentPath })
       } catch (e) {
         if (stringMode === 'auto') {
-          return Array.from(data)
+          if (data.find((b) => b < 32)) {
+            return Array.from(data)
+          } else {
+            return types.string(data)
+          }
         } else if (stringMode === 'string') {
           return types.string(data)
         } else {
@@ -67,10 +71,10 @@ export function getVal (data, wireType, prefix, stringMode, arrayMode, valueHand
  * @returns {any}
  */
 export function rawprotoparse (buffer, options = {}) {
-  const { prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal } = options
+  const { prefix = 'f', stringMode = 'auto', arrayMode = false, valueHandler = getVal, currentPath = '' } = options
   const out = {}
   for (const [fieldNumber, { data, wireType }] of reader(buffer)) {
-    const v = valueHandler(data, wireType, prefix, stringMode, arrayMode, valueHandler)
+    const v = valueHandler(data, wireType, prefix, stringMode, arrayMode, valueHandler, `${currentPath}.${prefix}${fieldNumber}`)
 
     if (v === null) {
       continue
