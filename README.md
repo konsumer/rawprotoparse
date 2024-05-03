@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This has been depracated, in favor of [rawproto](https://github.com/konsumer/rawproto), where I did similar  stuff, but improved things a bit. You should use that, instead.
+
 Very small raw protobuf parser.
 
 This is similar to [rawproto](https://github.com/konsumer/rawproto), but without anything around the schema-def.
